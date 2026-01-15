@@ -1,0 +1,1 @@
+HarmonyOS verifies → Trust Bridge → BlackBerryISS re-signs
