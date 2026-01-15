@@ -1,0 +1,72 @@
+===============================
+ FILE: bar-descriptor.xml
+===============================
+<?xml version="1.0" encoding="UTF-8"?>
+<bar-descriptor>
+    <author>Your Name</author>
+    <name>BlackBerryOS11Sample</name>
+    <versionNumber>1.0.0.0</versionNumber>
+    <packageType>IPK</packageType>
+    <id>com.example.blackberryos11sample</id>
+    <description>A minimal sample app for BlackBerryOS11 (Cascades).</description>
+    <permissions>
+        <permission>access_shared</permission>
+    </permissions>
+</bar-descriptor>
+
+
+===============================
+ FILE: src/main.cpp
+===============================
+#include <bb/cascades/Application>
+#include <bb/cascades/QmlDocument>
+#include <bb/cascades/AbstractPane>
+
+using namespace bb::cascades;
+
+int main(int argc, char **argv)
+{
+    Application app(argc, argv);
+
+    QmlDocument *qml = QmlDocument::create("asset:///main.qml").parent(&app);
+    AbstractPane *root = qml->createRootObject<AbstractPane>();
+
+    app.setScene(root);
+
+    return Application::exec();
+}
+
+
+===============================
+ FILE: assets/main.qml
+===============================
+import bb.cascades 1.2
+
+Page {
+    Container {
+        layout: DockLayout {}
+
+        Label {
+            id: header
+            text: "Hello BlackBerry OS11 (Sample app)"
+            horizontalAlignment: HorizontalAlignment.Center
+            verticalAlignment: VerticalAlignment.Center
+            textStyle { base: SystemDefaults.TextStyles.TitleText }
+        }
+
+        Button {
+            id: btn
+            text: "Tap me"
+            horizontalAlignment: HorizontalAlignment.Center
+            onClicked: {
+                info.text = "Button tapped at " + new Date().toLocaleTimeString()
+            }
+        }
+
+        Label {
+            id: info
+            text: ""
+            horizontalAlignment: HorizontalAlignment.Center
+        }
+    }
+}
